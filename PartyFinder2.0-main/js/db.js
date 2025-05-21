@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'partyfinder'
+  host: 'sql.freedb.tech',
+  user: 'freedb_party',
+  password: '8!P5QC&Y!fnv23@',
+  database: 'freedb_partyfinder'
 });
 
 // Conectar
