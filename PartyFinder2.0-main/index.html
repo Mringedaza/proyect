@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Party Finder - Login</title>
+  <link rel="stylesheet" href="css/startpagestyle.css" />
+  <link rel="stylesheet" href="css/signup.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="phones-container">
+      <div class="phone phone-front">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="screen-content">
+            <div class="overlay"></div>
+            <div class="app-name">
+              <div class="tagline">PARA LOS AMANTES DE</div>
+              <h1>LA NOCHE</h1>
+              <h2>PARTY</h2>
+              <h2>FINDER</h2>
+            </div>
+            <div class="store-buttons">
+              <a href="#" class="store-button">App Store</a>
+              <a href="#" class="store-button">Google Play</a>
+            </div>
+            <div class="action-buttons">
+              <a href="signup.html" class="action-button">REGISTRARSE</a>
+            </div>
+            <div class="age-restriction">EDAD +18</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone phone-back">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="screen-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="form-wrapper sing-in">
+      <form action="http://localhost:3000/login" method="post">
+        <h2>Login</h2>
+        <div class="input-group">
+          <input type="text" name="email" required />
+          <label>Correo</label>
+        </div>
+        <div class="input-group">
+          <input type="password" name="password" required />
+          <label>Password</label>
+        </div>
+        <div class="remember">
+          <label><input type="checkbox" /> Recordarme</label>
+        </div>
+        <button type="submit" name="blogin">Login</button>
+        <div id="loginError" style="color: green; margin-top: 10px;"></div>
+        <div class="singup-link">
+          <p>¿No tienes una cuenta? <a href="signup.html" class="singupbtn-link">Sign Up</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+document.querySelector('form').addEventListener('submit', async function(e) {
+  e.preventDefault(); // prevenir recarga
+  const form = e.target;
+  const data = {
+    email: form.email.value,
+    password: form.password.value
+  };
+const mensajeDiv = document.getElementById('loginError');
+    mensajeDiv.textContent = '';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const texto = await res.text();
+
+      if(res.ok) {
+        mensajeDiv.style.color = 'green';
+        mensajeDiv.textContent = texto;
+        form.reset()
+           setTimeout(() => {
+          window.location.href = 'page.html'; // redirige page
+      }, 1000);
+      } else {
+        mensajeDiv.style.color = 'red';
+        mensajeDiv.textContent = texto;
+      }
+    } catch (error) {
+      mensajeDiv.style.color = 'red';
+      mensajeDiv.textContent = 'Error de conexión.';
+      console.error(error);
+    }
+});
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,509 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: white;
+            overflow: hidden; /* Cambiado de overflow-x a overflow para evitar scroll en todo el body */
+            display: flex; /* Añadido display flex para la estructura principal */
+        }
+       
+        .sidebar {
+            width: 75px;
+            background-color: white;
+            height: 100vh;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Cambiado a fixed para mantenerlo fijo */
+            left: 0;
+            top: 0;
+            z-index: 100;
+        }
+
+        .sidebar:hover {
+            width: 250px;
+        }
+
+        .logo-container {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 26px;
+            font-weight: bold;
+            background: linear-gradient(to right, #ae25b3, #5271ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: #141414;
+        }
+
+        .sidebar:hover .logo-text {
+            opacity: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .nav-item.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            width: 30px;
+            text-align: center;
+            margin-right: 15px;
+        }
+
+        .nav-text {
+            font-size: 16px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: #f0f0f0;
+        }
+
+        .sidebar:hover .nav-text {
+            opacity: 1;
+        }
+
+        .profile {
+            margin-top: auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #eee;
+        }
+
+        .profile-pic {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .sidebar:hover .profile-info {
+            opacity: 1;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .profile-status {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Contenedor principal para el contenido */
+        .main-container {
+            flex: 1;
+            margin-left: 75px; /* Ancho inicial de la sidebar */
+            overflow-y: auto; /* Solo este contenedor tendrá scroll vertical */
+            height: 100vh;
+            padding: 20px;
+            transition: margin-left 0.3s ease; /* Para que se ajuste cuando la sidebar cambie de tamaño */
+        }
+
+        /* Ajuste cuando la sidebar se expande */
+        .sidebar:hover + .main-container {
+            margin-left: 250px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        /* Icono de cóctel para el logo */
+        .cocktail-icon {
+            display: inline-block;
+            position: relative;
+            width: 26px;
+            height: 26px;
+            margin-right: 5px;
+        }
+
+        .cocktail-glass {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #5271ff;
+            border-top: none;
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+            background: rgba(82, 113, 255, 0.2);
+        }
+
+        .cocktail-stem {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: #5271ff;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cocktail-base {
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            background: #5271ff;
+            bottom: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+        }        
+
+        /* Sección de carrusel */
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            margin-bottom: 30px;
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.3s ease;
+            padding-bottom: 10px;
+        }
+
+        /* Tarjetas principales (tendencias) */
+        .main-card {
+            position: relative;
+            min-width: 270px;
+            height: 150px;
+            margin-right: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .main-card:hover {
+            transform: scale(1.05);
+        }
+
+        .main-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .main-card:hover .main-card-info {
+            opacity: 1;
+        }
+
+        .main-card-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .main-card-desc {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        /* Ranking (los 10 más populares) */
+        .ranking-section {
+            margin-bottom: 40px;
+        }
+
+        .ranking-container {
+            display: flex;
+            position: relative;
+        }
+
+        .rank-number {
+            position: absolute;
+            font-size: 180px;
+            font-weight: 800;
+            color: #af1616;
+            z-index: 0;
+            line-height: 1;
+        }
+
+        .rank-card {
+            position: relative;
+            min-width: 200px;
+            height: 280px;
+            margin-right: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .rank-card:hover {
+            transform: scale(1.08);
+        }
+
+        .rank-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rank-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .rank-card:hover .rank-card-info {
+            opacity: 1;
+        }
+
+        .rank-card-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .rank-card-details {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .rank-card-rating {
+            display: flex;
+            align-items: center;
+            color: #46d369;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .rank-card-desc {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        /* Tarjetas originales */
+        .original-card {
+            position: relative;
+            min-width: 250px;
+            height: 140px;
+            margin-right: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .original-card:hover {
+            transform: scale(1.05);
+        }
+
+        .original-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .original-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #E50914;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .original-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .original-card:hover .original-card-info {
+            opacity: 1;
+        }
+
+        .original-card-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .original-card-desc {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        /* Botones de navegación */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 100px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel:hover .carousel-control {
+            opacity: 1;
+        }
+
+        .carousel-prev {
+            left: 0;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .carousel-next {
+            right: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+       
+        /* Media queries */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .main-card {
+                min-width: 170px;
+                height: 100px;
+            }
+
+            .rank-card {
+                min-width: 150px;
+                height: 220px;
+            }
+
+            .original-card {
+                min-width: 200px;
+                height: 120px;
+            }
+
+            .rank-number {
+                font-size: 120px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+            }
+        }
