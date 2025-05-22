@@ -112,7 +112,12 @@ document.querySelector('form').addEventListener('submit', async function(e) {
       mensajeDiv.textContent = texto; // por ejemplo: "Login exitoso"
       form.reset();
       // Redirigir tras 1 segundo para que el usuario vea el mensaje
-      localStorage.setItem('correo_verificacion', data.email)
+      try {
+        localStorage.setItem('correo_verificacion', data.email);
+         } catch (e) {
+            console.warn('localStorage no está disponible:', e);
+        }
+
       setTimeout(() => {
         window.location.href = 'verificarCorreo.html'; // redirige a login
       }, 1000);

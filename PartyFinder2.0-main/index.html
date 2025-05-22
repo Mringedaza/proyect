@@ -89,7 +89,11 @@ const mensajeDiv = document.getElementById('loginError');
         mensajeDiv.style.color = 'green';
         mensajeDiv.textContent = texto;
         form.reset()
-        localStorage.setItem('correo_verificacion', data.email)
+        try {
+        localStorage.setItem('correo_verificacion', data.email);
+         } catch (e) {
+            console.warn('localStorage no está disponible:', e);
+        }
            setTimeout(() => {
           window.location.href = 'verificacion.html'; // redirige page
       }, 1000);
