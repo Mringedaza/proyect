@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Party Finder - Login</title>
-  <link rel="stylesheet" href="css/startpagestyle.css" />
+  <link rel="stylesheet" href="css/index.css" />
   <link rel="stylesheet" href="css/signup.css" />
 </head>
 
@@ -89,8 +89,9 @@ const mensajeDiv = document.getElementById('loginError');
         mensajeDiv.style.color = 'green';
         mensajeDiv.textContent = texto;
         form.reset()
+        localStorage.setItem('correo_verificacion', data.email)
            setTimeout(() => {
-          window.location.href = 'page.html'; // redirige page
+          window.location.href = 'verificacion.html'; // redirige page
       }, 1000);
       } else {
         mensajeDiv.style.color = 'red';

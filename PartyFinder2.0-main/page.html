@@ -8,35 +8,46 @@
     <link rel="stylesheet" href="css/page.css">
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-icon"></div>
+    </div>
+
+    <!-- Partículas de fondo -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="neon-corner top-left"></div>
+    <div class="neon-corner bottom-right"></div>
+    
     <div class="sidebar">
         <div class="logo-container">
             <div class="logo">
                 <div class="logo-icon">
                     <i class="fas fa-glass-martini-alt"></i>
                 </div>
-                <div class="logo-text">Party Finder</div>
+                <div class="logo-text">PartyFinder</div>
             </div>
         </div>
         
-        <a class="nav-item" href="formbar.html">
+        <a class="nav-item" href="#">
             <div class="nav-icon">
-                <i class="fas fa-home"></i>
+                <i class="fas fa-calendar-check"></i>
             </div>
-            <div class="nav-text">Registra tu establecimiento</div>
+            <div class="nav-text">Consultar reservas</div>
         </a>
         
         <a class="nav-item">
             <div class="nav-icon">
-                <i class="fas fa-clipboard-list"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-            <div class="nav-text">Reservas</div>
+            <div class="nav-text">Buscar</div>
         </a>
         
-        <a class="nav-item active">
+        <a class="nav-item active" href="page.html">
             <div class="nav-icon">
-                <i class="fas fa-calendar-check"></i>
+                <i class="fas fa-home"></i>
             </div>
-            <div class="nav-text">Solicitudes</div>
+            <div class="nav-text">Inicio</div>
         </a>
         
         <a class="nav-item">
@@ -53,19 +64,13 @@
             <div class="nav-text">Configuracion</div>
         </a>
         
-        <a class="nav-item">
-            <div class="nav-icon">
-                <i class="fas fa-chart-bar"></i>
-            </div>
-            <div class="nav-text">Ranking</div>
-        </a>
         
         <div class="profile">
             <div class="profile-pic">
-                <img src="assets/images/perfil.jpg" alt="User profile">
+                <img src="assets/images/icon/logo.png" alt="User profile" >
             </div>
             <div class="profile-info">
-                <div class="profile-name">Nombre de Usuario</div>
+                <div class="profile-name" ><a href="perfiluser.html">Nombre de Usuario</a></div>
                 <div class="profile-status">Cuenta Free</div>
             </div>
         </div>
@@ -73,297 +78,198 @@
     
     <!-- Contenedor principal que tendrá scroll independiente -->
     <div class="main-container">
-         <section>
-            <h2 class="section-title">Tendencias ahora</h2>
-            <div class="carousel">
-                <button class="carousel-control carousel-prev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="carousel-container">
-                    <div class="main-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 234943.png" alt="Discoteca Opium Barcelona">
-                        <div class="main-card-info">
-                            <div class="main-card-title">Opium Barcelona</div>
-                            <div class="main-card-desc">Discoteca & Beach Club | DJ residente: Marco Carola</div>
-                        </div>
-                    </div>
-                    <div class="main-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235104.png" alt="Pacha Ibiza">
-                        <div class="main-card-info">
-                            <div class="main-card-title">Pacha Ibiza</div>
-                            <div class="main-card-desc">Discoteca icónica | Eventos especiales todos los fines de semana</div>
-                        </div>
-                    </div>
-                    <div class="main-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235453.png" alt="Teatro Kapital Madrid">
-                        <div class="main-card-info">
-                            <div class="main-card-title">Teatro Kapital</div>
-                            <div class="main-card-desc">7 plantas de música diferente | Madrid</div>
-                        </div>
-                    </div>
-                    <div class="main-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235631.png" alt="Ushuaïa Ibiza">
-                        <div class="main-card-info">
-                            <div class="main-card-title">Ushuaïa Ibiza</div>
-                            <div class="main-card-desc">Club al aire libre | DJs internacionales</div>
-                        </div>
-                    </div>
-                    <div class="main-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 234943.png" alt="Fabrik Madrid">
-                        <div class="main-card-info">
-                            <div class="main-card-title">Fabrik Madrid</div>
-                            <div class="main-card-desc">Macrodiscoteca | Eventos de música electrónica</div>
-                        </div>
-                    </div>
-                    <div class="main-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235104.png" alt="Discoteca Opium Barcelona">
-                        <div class="main-card-info">
-                            <div class="main-card-title">Opium Barcelona</div>
-                            <div class="main-card-desc">Discoteca & Beach Club | DJ residente: Marco Carola</div>
-                        </div>
-                    </div>
-                    <div class="main-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235453.png" alt="Discoteca Opium Barcelona">
-                        <div class="main-card-info">
-                            <div class="main-card-title">Opium Barcelona</div>
-                            <div class="main-card-desc">Discoteca & Beach Club | DJ residente: Marco Carola</div>
-                        </div>
-                    </div>
-                    <div class="main-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235631.png" alt="Discoteca Opium Barcelona">
-                        <div class="main-card-info">
-                            <div class="main-card-title">Opium Barcelona</div>
-                            <div class="main-card-desc">Discoteca & Beach Club | DJ residente: Marco Carola</div>
-                        </div>
+        <!-- Sección de Recomendados -->
+        <h2 class="section-title"><span class="emoji">🔥</span> Recomendados para ti <span class="emoji">🔥</span></h2>
+        <div class="carousel">
+            <button class="carousel-control carousel-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel-container" id="recommendedCarousel">
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 234943.png" alt="Discoteca Opium Barcelona">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Opium Barcelona</div>
+                        <div class="main-card-desc">Discoteca & Beach Club | DJ residente: Marco Carola</div>
                     </div>
                 </div>
-                <button class="carousel-control carousel-next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- Los 10 más populares en España hoy -->
-        <section class="ranking-section">
-            <h2 class="section-title">Los 10 más populares en España hoy</h2>
-            <div class="carousel">
-                <button class="carousel-control carousel-prev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="carousel-container ranking-container">
-                    <div class="rank-number">1</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001349.png" alt="Amnesia Ibiza">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Amnesia Ibiza</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.8
-                                </span>
-                                <span class="tag">Techno</span>
-                                <span class="tag">House</span>
-                            </div>
-                            <div class="rank-card-desc">Club legendario con terraza al aire libre y sala principal icónica</div>
-                        </div>
-                    </div>
-
-                    <div class="rank-number">2</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001405.png" alt="Elrow Barcelona">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Elrow Barcelona</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.7
-                                </span>
-                                <span class="tag">Temático</span>
-                                <span class="tag">Tech House</span>
-                            </div>
-                            <div class="rank-card-desc">Fiestas temáticas llenas de color, confeti y animación</div>
-                        </div>
-                    </div>
-
-                    <div class="rank-number">3</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001427.png" alt="Hï Ibiza">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Hï Ibiza</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.9
-                                </span>
-                                <span class="tag">VIP</span>
-                                <span class="tag">EDM</span>
-                            </div>
-                            <div class="rank-card-desc">Club de lujo con tecnología de última generación</div>
-                        </div>
-                    </div>
-
-                    <div class="rank-number">4</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001658.png" alt="Florida Park Madrid">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Florida Park Madrid</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.5
-                                </span>
-                                <span class="tag">Comercial</span>
-                                <span class="tag">Retro</span>
-                            </div>
-                            <div class="rank-card-desc">Eventos exclusivos en pleno Parque del Retiro</div>
-                        </div>
-                    </div>
-
-                    <div class="rank-number">5</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001349.png" alt="Razzmatazz Barcelona">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Razzmatazz Barcelona</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.6
-                                </span>
-                                <span class="tag">Indie</span>
-                                <span class="tag">Rock</span>
-                            </div>
-                            <div class="rank-card-desc">5 salas con diferentes estilos musicales</div>
-                        </div>
-                    </div>
-                    <div class="rank-number">6</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001405.png" alt="Razzmatazz Barcelona">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Razzmatazz Barcelona</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.6
-                                </span>
-                                <span class="tag">Indie</span>
-                                <span class="tag">Rock</span>
-                            </div>
-                            <div class="rank-card-desc">5 salas con diferentes estilos musicales</div>
-                        </div>
-                    </div>
-                    <div class="rank-number">7</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001427.png" alt="Razzmatazz Barcelona">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Razzmatazz Barcelona</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.6
-                                </span>
-                                <span class="tag">Indie</span>
-                                <span class="tag">Rock</span>
-                            </div>
-                            <div class="rank-card-desc">5 salas con diferentes estilos musicales</div>
-                        </div>
-                    </div>
-                    <div class="rank-number">8</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001658.png" alt="Razzmatazz Barcelona">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Razzmatazz Barcelona</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.6
-                                </span>
-                                <span class="tag">Indie</span>
-                                <span class="tag">Rock</span>
-                            </div>
-                            <div class="rank-card-desc">5 salas con diferentes estilos musicales</div>
-                        </div>
-                    </div>
-                    <div class="rank-number">9</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001349.png" alt="Razzmatazz Barcelona">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Razzmatazz Barcelona</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.6
-                                </span>
-                                <span class="tag">Indie</span>
-                                <span class="tag">Rock</span>
-                            </div>
-                            <div class="rank-card-desc">5 salas con diferentes estilos musicales</div>
-                        </div>
-                    </div>
-                    <div class="rank-number">10</div>
-                    <div class="rank-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-20 001405.png" alt="Razzmatazz Barcelona">
-                        <div class="rank-card-info">
-                            <div class="rank-card-title">Razzmatazz Barcelona</div>
-                            <div class="rank-card-details">
-                                <span class="rank-card-rating">
-                                    <i class="fas fa-star"></i> 4.6
-                                </span>
-                                <span class="tag">Indie</span>
-                                <span class="tag">Rock</span>
-                            </div>
-                            <div class="rank-card-desc">5 salas con diferentes estilos musicales</div>
-                        </div>
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 235104.png" alt="Pacha Ibiza">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Pacha Ibiza</div>
+                        <div class="main-card-desc">Discoteca icónica | Eventos especiales todos los fines de semana</div>
                     </div>
                 </div>
-                <button class="carousel-control carousel-next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- Originales de Party Finder -->
-        <section>
-            <h2 class="section-title">Recomendados para ti</h2>
-            <div class="carousel">
-                <button class="carousel-control carousel-prev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="carousel-container">
-                    <div class="original-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 234943.png" alt="Sala Apolo Barcelona">
-                        <div class="original-label">TOP 10</div>
-                        <div class="original-card-info">
-                            <div class="original-card-title">Sala Apolo Barcelona</div>
-                            <div class="original-card-desc">Club histórico en Barcelona | Música alternativa</div>
-                        </div>
-                    </div>
-                    <div class="original-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235104.png" alt="Shôko Barcelona">
-                        <div class="original-card-info">
-                            <div class="original-card-title">Shôko Barcelona</div>
-                            <div class="original-card-desc">Restaurante y club | Ambiente exclusivo</div>
-                        </div>
-                    </div>
-                    <div class="original-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235453.png" alt="New Garamond Valencia">
-                        <div class="original-label">TOP 10</div>
-                        <div class="original-card-info">
-                            <div class="original-card-title">New Garamond Valencia</div>
-                            <div class="original-card-desc">Música comercial | Varios ambientes</div>
-                        </div>
-                    </div>
-                    <div class="original-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 235631.png" alt="MOMA Club Madrid">
-                        <div class="original-card-info">
-                            <div class="original-card-title">MOMA Club Madrid</div>
-                            <div class="original-card-desc">Club exclusivo | Zona VIP | Centro de Madrid</div>
-                        </div>
-                    </div>
-                    <div class="original-card">
-                        <img src="assets/images/Captura de pantalla 2025-05-19 234943.png" alt="Octan Ibiza">
-                        <div class="original-card-info">
-                            <div class="original-card-title">Octan Ibiza</div>
-                            <div class="original-card-desc">Underground | Techno | Ambiente íntimo</div>
-                        </div>
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 235453.png" alt="Teatro Kapital Madrid">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Teatro Kapital</div>
+                        <div class="main-card-desc">7 plantas de música diferente | Madrid</div>
                     </div>
                 </div>
-                <button class="carousel-control carousel-next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 235631.png" alt="Ushuaïa Ibiza">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Ushuaïa Ibiza</div>
+                        <div class="main-card-desc">Club al aire libre | DJs internacionales</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 234943.png" alt="Fabrik Madrid">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Fabrik Madrid</div>
+                        <div class="main-card-desc">Macrodiscoteca | Eventos de música electrónica</div>
+                    </div>
+                </div>
+                 <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 235104.png" alt="Discoteca Opium Barcelona">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Opium Barcelona</div>
+                        <div class="main-card-desc">Discoteca & Beach Club | DJ residente: Marco Carola</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 235453.png" alt="Pacha Ibiza">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Pacha Ibiza</div>
+                        <div class="main-card-desc">Discoteca icónica | Eventos especiales todos los fines de semana</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 235104.png" alt="Teatro Kapital Madrid">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Teatro Kapital</div>
+                        <div class="main-card-desc">7 plantas de música diferente | Madrid</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 235631.png" alt="Ushuaïa Ibiza">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Ushuaïa Ibiza</div>
+                        <div class="main-card-desc">Club al aire libre | DJs internacionales</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="assets/images/Captura de pantalla 2025-05-19 234943.png" alt="Fabrik Madrid">
+                    <div class="main-card-info">
+                        <div class="main-card-title">Fabrik Madrid</div>
+                        <div class="main-card-desc">Macrodiscoteca | Eventos de música electrónica</div>
+                    </div>
+                </div>
             </div>
-        </section>
+            <button class="carousel-control carousel-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Bar del mes destacado -->
+        <h2 class="section-title"><span class="emoji">🏆</span> Mejor bar del mes <span class="emoji">🏆</span></h2>
+        <div class="featured-bar" >
+            <div class="featured-card">
+                <div class="badge">TOP PICK</div>
+                <img src="assets/images/Captura de pantalla 2025-05-19 234943.png" alt="Mejor Bar del Mes">
+                <div class="featured-overlay">
+                    <div class="featured-title"><a href="perfilbar.html"></a>Hï Ibiza</div>
+                    <div class="featured-rating">
+                        <div class="featured-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="featured-score">4.9/5.0</div>
+                    </div>
+                    <div class="featured-desc">
+                        Club de lujo con tecnología de última generación y los mejores DJs internacionales. Ubicado en Playa d'en Bossa, Ibiza.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de ranking -->
+        <h2 class="section-title"><span class="emoji">🌟</span> Los 10 más populares en Bogota hoy</h2>
+        <div class="carousel">
+            <button class="carousel-control carousel-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel-container" id="rankingCarousel">
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Amnesia Ibiza">
+                    <div class="main-card-info">
+                        <div class="main-card-title">1. Amnesia Ibiza</div>
+                        <div class="main-card-desc">Club legendario con terraza al aire libre</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Elrow Barcelona">
+                    <div class="main-card-info">
+                        <div class="main-card-title">2. Elrow Barcelona</div>
+                        <div class="main-card-desc">Fiestas temáticas llenas de color</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Hï Ibiza">
+                    <div class="main-card-info">
+                        <div class="main-card-title">3. Hï Ibiza</div>
+                        <div class="main-card-desc">Club de lujo con tecnología de última generación</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Florida Park Madrid">
+                    <div class="main-card-info">
+                        <div class="main-card-title">4. Florida Park Madrid</div>
+                        <div class="main-card-desc">Eventos exclusivos en pleno Parque del Retiro</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Razzmatazz Barcelona">
+                    <div class="main-card-info">
+                        <div class="main-card-title">5. Razzmatazz Barcelona</div>
+                        <div class="main-card-desc">5 salas con diferentes estilos musicales</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Amnesia Ibiza">
+                    <div class="main-card-info">
+                        <div class="main-card-title">1. Amnesia Ibiza</div>
+                        <div class="main-card-desc">Club legendario con terraza al aire libre</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Elrow Barcelona">
+                    <div class="main-card-info">
+                        <div class="main-card-title">2. Elrow Barcelona</div>
+                        <div class="main-card-desc">Fiestas temáticas llenas de color</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Hï Ibiza">
+                    <div class="main-card-info">
+                        <div class="main-card-title">3. Hï Ibiza</div>
+                        <div class="main-card-desc">Club de lujo con tecnología de última generación</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Florida Park Madrid">
+                    <div class="main-card-info">
+                        <div class="main-card-title">4. Florida Park Madrid</div>
+                        <div class="main-card-desc">Eventos exclusivos en pleno Parque del Retiro</div>
+                    </div>
+                </div>
+                <div class="main-card">
+                    <img src="/api/placeholder/400/320" alt="Razzmatazz Barcelona">
+                    <div class="main-card-info">
+                        <div class="main-card-title">5. Razzmatazz Barcelona</div>
+                        <div class="main-card-desc">5 salas con diferentes estilos musicales</div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control carousel-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
     </div>
+
 
     <script src="js/navegacioncarrusel.js"></script>
 </body>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verificación de Código</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0b1729;
+      --text-color: #ffffff;
+      --neon-color: #0ef;
+      --shadow-color: rgba(0, 229, 255, 0.4);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #000;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px var(--neon-color);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 20px 0 10px;
+      border: none;
+      border-bottom: 2px solid var(--neon-color);
+      background: transparent;
+      color: var(--text-color);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #00f7ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: var(--neon-color);
+      color: #000;
+      border: none;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--neon-color);
+      transition: opacity 0.3s ease;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    #mensaje {
+      margin-top: 20px;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Ingresa el código enviado a tu correo</h2>
+    <form id="verificarForm">
+      <input type="text" id="codigo" placeholder="Código de verificación" required />
+      <button type="submit">Verificar</button>
+    </form>
+    <div id="mensaje"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('verificarForm');
+    const mensaje = document.getElementById('mensaje');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const codigo = document.getElementById('codigo').value.trim();
+      const email = localStorage.getItem('correo_verificacion');
+
+      if (!email) {
+        mensaje.textContent = 'No se encontró el correo almacenado.';
+        mensaje.style.color = 'red';
+        return;
+      }
+
+      try {
+        const res = await fetch('/verificar-codigo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, codigo }),
+        });
+
+        const text = await res.text();
+        mensaje.textContent = text;
+
+        if (res.ok) {
+          mensaje.style.color = 'lime';
+          setTimeout(() => {
+            window.location.href = '/index.html'; 
+          }, 2000);
+        } else {
+          mensaje.style.color = 'red';
+        }
+      } catch (error) {
+        mensaje.textContent = 'Error al verificar el código.';
+        mensaje.style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>
+

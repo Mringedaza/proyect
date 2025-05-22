@@ -3,9 +3,11 @@ const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql2');
 const db = require('./db');
-
+const bcrypt = require('bcrypt'); 
+const crypto = require('crypto');
 const app = express();
 const PORT = 3000;
+const transporter = require('./correo'); 
 
 // Configura CORS para permitir peticiones desde cualquier origen (puedes ajustar)
 app.use(cors());
@@ -21,46 +23,78 @@ app.use(express.static(path.join(__dirname, '..')));
 
 // Ruta GET para la página principal
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'login.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 }); 
 
+
+
+
+
+
+
+
+
 // Ruta POST para registrar usuario (datos recibidos desde el formulario)
-
-const bcrypt = require('bcrypt'); 
-
 app.post('/registro', async (req, res) => {
-  console.log('Datos recibidos:', req.body);
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
     return res.status(400).send('Faltan datos requeridos');
   }
 
+  // Validar si ya existe en `usuarios` o `registro_pendiente`
   db.query(
-    'SELECT * FROM usuarios WHERE username = ? OR email = ?',
-    [username, email],
-    async (err, results) => {
-      if (err) {
-        console.error('Error en la consulta SELECT:', err);
-        return res.status(500).send('Error en la base de datos');
-      }
+    'SELECT * FROM usuarios WHERE email = ? OR username = ?',
+    [email, username],
+    async (err, users) => {
+      if (err) return res.status(500).send('Error en la base de datos');
 
-      if (results.length > 0) {
-        return res.status(409).send('El usuario o email ya está registrado');
+      if (users.length > 0) {
+        return res.status(409).send('El email o usuario ya está registrado');
       }
-
-      const hashedPassword = await bcrypt.hash(password, 10);
 
       db.query(
-        'INSERT INTO usuarios (username, email, contrasena) VALUES (?, ?, ?)',
-        [username, email, hashedPassword],
-        (err, result) => {
-          if (err) {
-            console.error('Error en la consulta INSERT:', err);
-            return res.status(500).send('Error al registrar usuario');
+        'SELECT * FROM registro_pendiente WHERE email = ?',
+        [email],
+        async (err2, pendientes) => {
+          if (err2) return res.status(500).send('Error validando pendientes');
+
+          if (pendientes.length > 0) {
+            return res.status(409).send('Ya se ha iniciado un registro con este correo');
           }
 
-          res.status(200).send('Usuario registrado con éxito');
+          // Hashear contraseña y generar código
+          const hashedPassword = await bcrypt.hash(password, 10);
+          const codigo = crypto.randomInt(100000, 999999).toString();
+
+          // Guardar en tabla temporal
+          db.query(
+            'INSERT INTO registro_pendiente (username, email, contrasena, codigo_verificacion) VALUES (?, ?, ?, ?)',
+            [username, email, hashedPassword, codigo],
+            (err3) => {
+              if (err3) {
+                console.error(err3);
+                return res.status(500).send('Error guardando registro pendiente');
+              }
+
+              // Enviar código por correo
+              const mailOptions = {
+                from: 'partyfinder@gmail.com',
+                to: email,
+                subject: 'Código de verificación',
+                text: `Tu código de verificación es: ${codigo}`
+              };
+
+              transporter.sendMail(mailOptions, (mailErr) => {
+                if (mailErr) {
+                  console.error('Error enviando correo:', mailErr);
+                  return res.status(500).send('No se pudo enviar el código');
+                }
+
+                res.status(200).send('Código enviado. Verifica tu correo para completar el registro');
+              });
+            }
+          );
         }
       );
     }
@@ -68,31 +102,147 @@ app.post('/registro', async (req, res) => {
 });
 
 
+
+
+
+//Verificacion registro 
+app.post('/verificar-codigo', (req, res) => {
+  const { email, codigo } = req.body;
+
+  db.query(
+    'SELECT * FROM registro_pendiente WHERE email = ? ORDER BY creado_en DESC LIMIT 1',
+    [email],
+    (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Error del servidor');
+      }
+
+      if (results.length === 0) {
+        return res.status(404).send('No hay un registro pendiente para este correo');
+      }
+
+      const usuarioPendiente = results[0];
+
+      if (usuarioPendiente.codigo_verificacion.toString().trim() === codigo.toString().trim()) {
+        db.query(
+          'INSERT INTO usuarios (username, email, contrasena, verificado) VALUES (?, ?, ?, 1)',
+          [usuarioPendiente.username, usuarioPendiente.email, usuarioPendiente.contrasena],
+          (insertErr) => {
+            if (insertErr) {
+              console.error('Error insertando en usuarios:', insertErr);
+              return res.status(500).send('No se pudo completar el registro');
+            }
+
+            db.query(
+              'DELETE FROM registro_pendiente WHERE email = ?',
+              [email],
+              () => {
+                res.status(200).send('Registro completado con éxito. Ya puedes iniciar sesión');
+              }
+            );
+          }
+        );
+      } else {
+        return res.status(401).send('Código incorrecto');
+      }
+    }
+  );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Ruta POST para el login de usuario 
 // Ruta POST para login real desde base de datos
+
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
-  const sql = 'SELECT * FROM usuarios WHERE email = ?';
-  db.query(sql, [email], async (err, results) => {
-    if (err) {
-      console.error('Error al buscar usuario:', err);
-      return res.status(500).send('Error en la base de datos');
-    }
-
-    if (results.length === 0) {
-      return res.status(401).send('Correo no registrado');
-    }
+  db.query('SELECT * FROM usuarios WHERE email = ?', [email], async (err, results) => {
+    if (err) return res.status(500).send('Error en la base de datos');
+    if (results.length === 0) return res.status(401).send('Correo no registrado');
 
     const user = results[0];
     const passwordCorrecta = await bcrypt.compare(password, user.contrasena);
 
-    if (!passwordCorrecta) {
-      return res.status(401).send('Contraseña incorrecta');
+    if (!passwordCorrecta) return res.status(401).send('Contraseña incorrecta');
+
+    // Generar código de verificación
+    const codigo = crypto.randomInt(100000, 999999).toString();
+
+    // Guardar código en la base de datos
+    db.query(
+      'UPDATE usuarios SET codigo_verificacion = ? WHERE email = ?',
+      [codigo, email],
+      (updateErr) => {
+        if (updateErr) {
+          console.error('Error al guardar el código:', updateErr);
+          return res.status(500).send('Error interno');
+        }
+
+        // Enviar el código por correo
+        const mailOptions = {
+          from: 'partyfinder@gmail.com',
+          to: email,
+          subject: 'Código de verificación',
+          text: `Tu código de verificación es: ${codigo}`
+        };
+
+        transporter.sendMail(mailOptions, (mailErr, info) => {
+          if (mailErr) {
+            console.error('Error al enviar correo:', mailErr);
+            return res.status(500).send('No se pudo enviar el código');
+          }
+
+          res.status(200).send('Código enviado al correo');
+        });
+      }
+    );
+  });
+});
+
+
+
+
+// Ruta POST para verificar el código de verificación 
+
+app.post('/verificar-codigologin', (req, res) => {
+  const { email, codigo } = req.body;
+
+  const sql = 'SELECT codigo_verificacion FROM usuarios WHERE email = ?';
+  db.query(sql, [email], (err, results) => {
+    if (err) {
+      console.error('Error al verificar el código:', err);
+      return res.status(500).send('Error del servidor');
     }
 
-    // Login exitoso
-    res.status(200).send('Login exitoso');
+    if (results.length === 0) {
+      return res.status(404).send('Usuario no encontrado');
+    }
+
+    const codigoGuardado = results[0].codigo_verificacion;
+
+    if (!codigoGuardado) {
+      return res.status(400).send('No se encontró código de verificación');
+    }
+
+    // Comparar como strings y sin espacios
+    if (codigoGuardado.toString().trim() === codigo.toString().trim()) {
+      return res.status(200).send('Código correcto');
+    } else {
+      return res.status(401).send('Código incorrecto');
+    }
   });
 });
 
@@ -106,6 +256,7 @@ app.post('/login', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
+
 
 
 

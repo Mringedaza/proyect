@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Party Finder - Login</title>
-    <link rel="stylesheet" href="css/startpagestyle.css">
+    <title>Party Finder - Login</title>>
     <link rel="stylesheet" href="css/signup.css">
     
     <body>
@@ -113,8 +112,9 @@ document.querySelector('form').addEventListener('submit', async function(e) {
       mensajeDiv.textContent = texto; // por ejemplo: "Login exitoso"
       form.reset();
       // Redirigir tras 1 segundo para que el usuario vea el mensaje
+      localStorage.setItem('correo_verificacion', data.email)
       setTimeout(() => {
-        window.location.href = 'index.html'; // redirige a login
+        window.location.href = 'verificarCorreo.html'; // redirige a login
       }, 1000);
     } else {
       mensajeDiv.style.color = 'red';
