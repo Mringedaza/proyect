@@ -1,7 +1,15 @@
-const mysql = require('mysql2');
-require('dotenv').config(); // útil si usas .env en desarrollo local
+require('dotenv').config(); // primero, carga las variables de entorno
+console.log('DATABASE_URL:', process.env.DATABASE_URL); // luego puedes imprimirla
 
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+const mysql = require('mysql2');
+
+const dbUrl = process.env.DATABASE_URL;
+
+if (!dbUrl) {
+  throw new Error('❌ DATABASE_URL no está definida. Revisa tu archivo .env');
+}
+
+const connection = mysql.createConnection(dbUrl);
 
 connection.connect((err) => {
   if (err) {
@@ -18,4 +26,5 @@ connection.query('SELECT NOW()', (err, results) => {
 });
 
 module.exports = connection;
+
 
