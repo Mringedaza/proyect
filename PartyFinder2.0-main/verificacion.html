@@ -101,14 +101,14 @@
       e.preventDefault();
       const codigo = document.getElementById('codigo').value;
       try {
-        const correo = localStorage.getItem('correo_verificacion');
-        if (correo) {
-        console.log("Correo recuperado:", correo);
-        // puedes mostrarlo o usarlo
-            }
-        } catch (e) {
-            console.warn('No se pudo acceder al correo guardado:', e);
-            }
+  const email = localStorage.getItem('correo_verificacion');
+  if (email) {
+    console.log("Correo recuperado:", email);
+    // puedes mostrarlo o usarlo
+  }
+} catch (e) {
+  console.warn('No se pudo acceder al correo guardado:', e);
+}
 
       const res = await fetch('/verificar-codigologin', {
         method: 'POST',
