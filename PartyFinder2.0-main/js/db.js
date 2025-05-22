@@ -1,20 +1,19 @@
 const mysql = require('mysql2');
+require('dotenv').config(); // útil si usas .env en desarrollo local
 
-const connection = mysql.createConnection({
-  host: 'b5egfcyu38ao00c4vlnz-mysql.services.clever-cloud.com',
-  user: 'uu6x7l7zmqu4jtp0',
-  password: 'SxQhzLMXUo5MYJ2n0Kln',
-  database: 'b5egfcyu38ao00c4vlnz'
-});
+const connection = mysql.createConnection(process.env.DATABASE_URL);
 
-// Conectar
 connection.connect((err) => {
   if (err) {
-    console.error('❌ Error de conexión:', err);
+    console.error('❌ Error al conectar con la base de datos:', err);
     return;
   }
-  console.log('✅ Conexión exitosa a la base de datos.');
+  console.log('✅ Conexión exitosa a Clever Cloud');
 });
 
-module.exports = connection;
+// Ejemplo de consulta
+connection.query('SELECT NOW()', (err, results) => {
+  if (err) throw err;
+  console.log('Hora actual:', results[0]);
+});
 
