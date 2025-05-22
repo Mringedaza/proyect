@@ -17,3 +17,5 @@ connection.query('SELECT NOW()', (err, results) => {
   console.log('Hora actual:', results[0]);
 });
 
+module.exports = connection;
+
