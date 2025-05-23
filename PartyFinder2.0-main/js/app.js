@@ -183,7 +183,7 @@ app.post('/login', (req, res) => {
         return res.status(401).send('Contraseña incorrecta');
       }
 
-      res.status(200).send('/index.html');
+      res.status(200).send('Inicio de sesion correcto');
     }
   );
 });
