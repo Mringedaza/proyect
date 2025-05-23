@@ -19,7 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Servir archivos estáticos desde la raíz del proyecto
-app.use(express.static(path.join(__dirname, '..')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
 
 // Ruta GET para la página principal
 app.get('/', (req, res) => {
