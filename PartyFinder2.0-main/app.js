@@ -2,12 +2,12 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql2');
-const db = require('./db');
+const db = require('./js/db');
 const bcrypt = require('bcrypt'); 
 const crypto = require('crypto');
 const app = express();
 const PORT = process.env.PORT || 3000;
-const transporter = require('./correo'); 
+const transporter = require('./js/correo'); 
 
 // Configura CORS para permitir peticiones desde cualquier origen (puedes ajustar)
 app.use(cors());
