@@ -20,17 +20,15 @@ body {
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  flex-direction: column; 
 }
 
 .container {
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  max-width: 1200px;
   display: flex;
+  justify-content: center;
+  align-items: center; /* Centrado vertical */
   flex-direction: row;
-  padding: 20px;
+  gap: 40px; /* Espaciado entre los dos elementos (teléfonos y formulario) */
 }
 
 .phones-container {
@@ -54,16 +52,15 @@ body {
 }
 
 .phone-front {
-  left: 50px;
-  z-index: 2;
-  transform: rotate(-5deg);
+  left: 50%;
+  transform: translateX(-70%) rotate(-5deg); /* Ajusta el porcentaje según visualices */
 }
 
 .phone-back {
-  left: 150px;
-  z-index: 1;
-  transform: rotate(5deg);
+  left: 50%;
+  transform: translateX(0%) rotate(5deg); /* Ligeramente detrás */
 }
+
 
 .notch {
   position: absolute;
