@@ -19,7 +19,8 @@ body {
 }
 
 .container {
-    margin: 50px auto 0 auto;
+    margin-top: 50px;
+    margin-left: 130px;
     width: 100%;
     max-width: 1200px;
     display: flex;
@@ -48,17 +49,16 @@ body {
 }
 
 .phone-front {
-    left: 50%;
-    transform: translateX(-120%) rotate(-5deg);
+    left: 50px;
     z-index: 2;
+    transform: rotate(-5deg);
 }
 
 .phone-back {
-    left: 50%;
-    transform: translateX(20%) rotate(5deg);
+    left: 150px;
     z-index: 1;
+    transform: rotate(5deg);
 }
-
 
 .notch {
     position: absolute;
@@ -208,7 +208,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
 /* Responsividad */
