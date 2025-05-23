@@ -666,5 +666,22 @@
             handleResize();
         });
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const userId = 1; // o obtenerlo desde sesión/cookie
+
+    try {
+        const response = await fetch(`/api/perfil/${userId}`);
+        const user = await response.json();
+
+        // Cambiar datos en el DOM
+        document.querySelector('.username').textContent = `@${user.username}`;
+
+    } catch (error) {
+        console.error('Error cargando el perfil:', error);
+    }
+});
+</script>
+
 </body>
 </html>

@@ -190,6 +190,17 @@ app.post('/login', (req, res) => {
 
 
 
+app.get('/api/perfil/:id', async (req, res) => {
+    const userId = req.params.id;
+
+    const [rows] = await db.query('SELECT username FROM usuarios WHERE id = ?', [userId]);
+
+    if (rows.length === 0) {
+        return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    res.json(rows[0]);
+});
 
 
 
