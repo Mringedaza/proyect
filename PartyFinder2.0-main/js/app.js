@@ -166,18 +166,26 @@ app.post('/verificar-codigo', (req, res) => {
 // Ruta POST para el login de usuario 
 // Ruta POST para login real desde base de datos
 
-app.post('/login', (req, res) => {
+router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
-  db.query('SELECT * FROM usuarios WHERE email = ?', [email], async (err, results) => {
-    if (err) return res.status(500).send('Error en la base de datos');
-    if (results.length === 0) return res.status(401).send('Correo no registrado');
+  connection.query(
+    'SELECT * FROM usuarios WHERE email = ?',
+    [email],
+    async (err, results) => {
+      if (err) return res.status(500).send('Error en la base de datos');
+      if (results.length === 0) return res.status(401).send('Correo no registrado');
 
-    const user = results[0];
-    const passwordCorrecta = await bcrypt.compare(password, user.contrasena);
+      const user = results[0];
+      const passwordCorrecta = await bcrypt.compare(password, user.contrasena);
 
-    if (!passwordCorrecta) return res.status(401).send('Contraseña incorrecta');
-  });
+      if (!passwordCorrecta) {
+        return res.status(401).send('Contraseña incorrecta');
+      }
+
+      res.status(200).send('/index.html');
+    }
+  );
 });
 
 
