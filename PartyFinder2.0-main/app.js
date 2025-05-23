@@ -19,18 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Servir archivos estáticos desde la raíz del proyecto
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use(express.static(path.join(__dirname)));
 
 // Ruta GET para la página principal
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
-  res.sendFile(path.join(__dirname, 'page.html'));
-  res.sendFile(path.join(__dirname, 'signup.html'));
-  res.sendFile(path.join(__dirname, 'verificarCorreo.html'));
-  res.sendFile(path.join(__dirname, 'formbar.html'));
-  res.sendFile(path.join(__dirname, 'perfilbar.html'));
-  res.sendFile(path.join(__dirname, 'perfiluser.html'));
 }); 
 
 
