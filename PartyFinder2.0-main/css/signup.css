@@ -19,8 +19,7 @@ body {
 }
 
 .container {
-    margin-top: 50px;
-    margin-left: 130px;
+    margin: 50px auto 0 auto;
     width: 100%;
     max-width: 1200px;
     display: flex;
@@ -49,15 +48,15 @@ body {
 }
 
 .phone-front {
-    left: 50px;
+    left: 50%;
+    transform: translateX(-120%) rotate(-5deg);
     z-index: 2;
-    transform: rotate(-5deg);
 }
 
 .phone-back {
-    left: 150px;
+    left: 50%;
+    transform: translateX(20%) rotate(5deg);
     z-index: 1;
-    transform: rotate(5deg);
 }
 
 .notch {
@@ -91,11 +90,7 @@ body {
     background-position: center;
 }
 
-.phone-front .screen-content {
-    background-image: url("/api/placeholder/280/560");
-    position: relative;
-}
-
+.phone-front .screen-content,
 .phone-back .screen-content {
     background-image: url("/api/placeholder/280/560");
 }
@@ -208,6 +203,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 /* Responsividad */
@@ -223,15 +219,16 @@ body {
     }
 
     .phone {
-        transform: scale(0.8);
+        width: 240px;
+        height: 480px;
     }
 
     .phone-front {
-        left: calc(50% - 100px);
+        transform: translateX(-120%) rotate(-5deg);
     }
 
     .phone-back {
-        left: calc(50% + 20px);
+        transform: translateX(20%) rotate(5deg);
     }
 }
 
@@ -241,7 +238,8 @@ body {
     }
 
     .phone {
-        transform: scale(0.7);
+        width: 220px;
+        height: 440px;
     }
 }
 
@@ -256,10 +254,7 @@ body {
     }
 }
 
-/*
-Estilos del formulario 
-*/
-
+/* Estilos del formulario */
 .wrapper {
     position: relative;
     width: 100%;
@@ -342,8 +337,8 @@ h2 {
     outline: none;
 }
 
-.input-group input:focus~label,
-.input-group input:valid~label {
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
     top: -5px;
     font-size: clamp(12px, 3vw, 14px);
 }
@@ -424,21 +419,20 @@ button a {
     text-decoration: underline;
 }
 
-/* Media Queries */
 @media (max-width: 480px) {
     .wrapper {
         height: auto;
         min-height: 500px;
     }
-    
+
     .form-wrapper {
         padding: 15px;
     }
-    
+
     .input-group {
         margin: 20px 0;
     }
-    
+
     .remember {
         margin: -5px 0 10px 5px;
     }
@@ -448,15 +442,15 @@ button a {
     .wrapper {
         min-height: 450px;
     }
-    
+
     .input-group {
         margin: 15px 0;
     }
-    
+
     button {
         height: 35px;
     }
-    
+
     button a {
         line-height: 35px;
     }
