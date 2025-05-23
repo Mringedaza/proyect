@@ -25,6 +25,12 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 // Ruta GET para la página principal
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'page.html'));
+  res.sendFile(path.join(__dirname, 'signup.html'));
+  res.sendFile(path.join(__dirname, 'verificarCorreo.html'));
+  res.sendFile(path.join(__dirname, 'formbar.html'));
+  res.sendFile(path.join(__dirname, 'perfilbar.html'));
+  res.sendFile(path.join(__dirname, 'perfiluser.html'));
 }); 
 
 
