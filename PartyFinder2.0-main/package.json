@@ -2,9 +2,9 @@
   "name": "partyfinder-backend",
   "version": "1.0.0",
   "description": "Backend de PartyFinder con Express y MySQL",
-  "main": "js/app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node js/app.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
