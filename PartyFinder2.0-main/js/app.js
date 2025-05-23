@@ -6,7 +6,7 @@ const db = require('./db');
 const bcrypt = require('bcrypt'); 
 const crypto = require('crypto');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const transporter = require('./correo'); 
 
 // Configura CORS para permitir peticiones desde cualquier origen (puedes ajustar)
@@ -166,31 +166,27 @@ app.post('/verificar-codigo', (req, res) => {
 // Ruta POST para el login de usuario 
 // Ruta POST para login real desde base de datos
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).send('Método no permitido');
-
+app.post('/login', (req, res) => { 
   const { email, password } = req.body;
 
-  try {
-    const [results] = await db.execute('SELECT * FROM usuarios WHERE email = ?', [email]);
+  db.query(
+    'SELECT * FROM usuarios WHERE email = ?',
+    [email],
+    async (err, results) => {
+      if (err) return res.status(500).send('Error en la base de datos');
+      if (results.length === 0) return res.status(401).send('Correo no registrado');
 
-    if (results.length === 0) {
-      return res.status(401).send('Correo no registrado');
+      const user = results[0];
+      const passwordCorrecta = await bcrypt.compare(password, user.contrasena);
+
+      if (!passwordCorrecta) {
+        return res.status(401).send('Contraseña incorrecta');
+      }
+
+      res.status(200).send('Inicio de sesion correcto');
     }
-
-    const user = results[0];
-    const passwordCorrecta = await bcrypt.compare(password, user.contrasena);
-
-    if (!passwordCorrecta) {
-      return res.status(401).send('Contraseña incorrecta');
-    }
-
-    return res.status(200).send('Inicio de sesión correcto');
-  } catch (err) {
-    console.error('Error al iniciar sesión:', err);
-    return res.status(500).send('Error interno del servidor');
-  }
-}
+  );
+});
 
 
 
