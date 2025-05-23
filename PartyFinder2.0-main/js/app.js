@@ -166,10 +166,10 @@ app.post('/verificar-codigo', (req, res) => {
 // Ruta POST para el login de usuario 
 // Ruta POST para login real desde base de datos
 
-router.post('/login', (req, res) => { 
+app.post('/login', (req, res) => { 
   const { email, password } = req.body;
 
-  connection.query(
+  db.query(
     'SELECT * FROM usuarios WHERE email = ?',
     [email],
     async (err, results) => {
