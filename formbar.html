@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/inscriptionbar.css">
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="header">
+                <h1>PARTY</h1>
+                <h2>FINDER</h2>
+            </div>
+            <div class="form-wrapper">
+                <form action="registro-establecimiento.php" method="post" enctype="multipart/form-data">
+                    <h2>Registro de Establecimiento</h2>
+                    
+                    <!-- Información básica -->
+                    <div class="input-group">
+                        <input type="text" name="nombre" required>
+                        <label>Nombre del establecimiento</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <select name="tipo" required>
+                                <option value=""></option>
+                                <option value="discoteca">Discoteca</option>
+                                <option value="bar">Bar</option>
+                                <option value="club">Club nocturno</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <label>Tipo de local</label>
+                        </div>
+                        
+                        <div class="input-group">
+                            <input type="number" name="capacidad" required>
+                            <label>Capacidad (personas)</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Información de contacto -->
+                    <div class="input-group">
+                        <input type="email" name="email" required>
+                        <label>Email de contacto</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="tel" name="telefono" required>
+                        <label>Teléfono</label>
+                    </div>
+                    
+                    <!-- Ubicación -->
+                    <div class="input-group">
+                        <input type="text" name="direccion" required>
+                        <label>Dirección completa</label>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <input type="text" name="ciudad" required>
+                            <label>Ciudad</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Horarios -->
+                    <div class="input-group">
+                        <textarea name="horarios" required></textarea>
+                        <label>Horarios de apertura</label>
+                    </div>
+                    
+                    <!-- Detalles adicionales -->
+                    <div class="input-group">
+                        <textarea name="descripcion" required></textarea>
+                        <label>Descripción del establecimiento</label>
+                    </div>
+                    
+                    <!-- Fotos -->
+                    <div class="upload-group">
+                        <label>Fotos del establecimiento (máximo 5)</label>
+                        <div class="file-input-wrapper">
+                            <button type="button" class="file-input-button">Subir imágenes</button>
+                            <input type="file" name="fotos[]" multiple accept="image/*" class="file-input">
+                        </div>
+                    </div>
+                    
+                    <!-- Licencia -->
+                    <div class="upload-group">
+                        <label>Licencia de funcionamiento (PDF)</label>
+                        <div class="file-input-wrapper">
+                            <button type="button" class="file-input-button">Subir documento</button>
+                            <input type="file" name="licencia" accept=".pdf" class="file-input">
+                        </div>
+                    </div>
+                    
+                    <!-- Credenciales -->
+                    <div class="input-group">
+                        <input type="text" name="username" required>
+                        <label>Nombre de usuario</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" name="password" required>
+                        <label>Contraseña</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" name="confirm_password" required>
+                        <label>Confirmar contraseña</label>
+                    </div>
+                    
+                    <!-- Acuerdos -->
+                    <div class="agreement">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Acepto los términos y condiciones</label>
+                    </div>
+                    
+                    <div class="agreement">
+                        <input type="checkbox" id="over18" name="over18" required>
+                        <label for="over18">Confirmo que este establecimiento sirve a clientes mayores de 18 años</label>
+                    </div>
+                    
+                    <button type="submit" name="register">Registrar establecimiento</button>
+                    
+                    <div class="login-link">
+                        <p>¿Ya tienes una cuenta? <a href="login.html">Iniciar sesión</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script para mostrar los nombres de los archivos seleccionados
+        document.querySelectorAll('.file-input').forEach(input => {
+            input.addEventListener('change', function() {
+                const button = this.previousElementSibling;
+                const fileCount = this.files.length;
+                
+                if (fileCount > 0) {
+                    if (fileCount === 1) {
+                        button.textContent = this.files[0].name;
+                    } else {
+                        button.textContent = `${fileCount} archivos seleccionados`;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

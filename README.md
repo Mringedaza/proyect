@@ -1,1 +1,1 @@
-# proyect
+# PartyFinder2.0
