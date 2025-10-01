@@ -5,7 +5,7 @@ const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql2');
 const db = require('./js/db');
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcryptjs'); 
 const crypto = require('crypto');
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -208,7 +208,7 @@ app.get('/api/perfil/:id', async (req, res) => {
 
 
 // Iniciar servidor
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 
