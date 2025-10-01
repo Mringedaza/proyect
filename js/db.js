@@ -1,4 +1,8 @@
+require('dotenv').config();
+
+const e = require('express');
 const mysql = require('mysql2');
+const app =express();
 
 // Conexión usando variables de entorno
 const connection = mysql.createConnection({
