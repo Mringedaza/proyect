@@ -46,14 +46,14 @@ app.post('/registro', async (req, res) => {
 
   // Validar si ya existe en `usuarios` o `registro_pendiente`
   db.query(
-    'SELECT * FROM usuarios WHERE email = ? OR username = ?',
-    [email, username],
-    async (err, users) => {
-      if (err) return res.status(500).send('Error en la base de datos');
+  'SELECT * FROM usuarios WHERE email = ?',
+  [email],
+  async (err, users) => {
+    if (err) return res.status(500).send('Error en la base de datos');
 
-      if (users.length > 0) {
-        return res.status(409).send('El email o usuario ya está registrado');
-      }
+    if (users.length > 0) {
+      return res.status(409).send('El email ya está registrado');
+    }
 
       /*db.query(
         'SELECT * FROM registro_pendiente WHERE email = ?',
