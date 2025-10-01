@@ -55,7 +55,7 @@ app.post('/registro', async (req, res) => {
         return res.status(409).send('El email o usuario ya está registrado');
       }
 
-      db.query(
+      /*db.query(
         'SELECT * FROM registro_pendiente WHERE email = ?',
         [email],
         async (err2, pendientes) => {
@@ -98,6 +98,22 @@ app.post('/registro', async (req, res) => {
             }
           );
         }
+      );*/
+
+       const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Insertar directamente en la tabla usuarios
+      db.query(
+        'INSERT INTO usuarios (username, email, contrasena, verificado) VALUES (?, ?, ?, 1)',
+        [username, email, hashedPassword],
+        (insertErr) => {
+          if (insertErr) {
+            console.error(insertErr);
+            return res.status(500).send('Error al crear usuario');
+          }
+
+          res.status(200).send('Usuario registrado correctamente');
+        }
       );
     }
   );
@@ -107,7 +123,7 @@ app.post('/registro', async (req, res) => {
 
 
 
-//Verificacion registro 
+/*Verificacion registro 
 app.post('/verificar-codigo', (req, res) => {
   const { email, codigo } = req.body;
 
@@ -151,6 +167,7 @@ app.post('/verificar-codigo', (req, res) => {
     }
   );
 });
+*/
 
 
 
