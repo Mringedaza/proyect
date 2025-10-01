@@ -8,7 +8,7 @@ const db = require('./js/db');
 const bcrypt = require('bcryptjs'); 
 const crypto = require('crypto');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 16166;
 const transporter = require('./js/correo'); 
 
 // Configura CORS para permitir peticiones desde cualquier origen (puedes ajustar)
